@@ -19,9 +19,9 @@
 
 **Instance 2**:
 
-- *What I gave the AI:* 
-- *What it produced:* 
-- *What I changed or overrode:*
+- *What I gave the AI:* A request to summarize the repository structure and identify where watchlist-related models, services, and routes were defined.
+- *What it produced:* A focused overview of the app layout, including `models.py`, `services/watchlist_service.py`, and `routes/watchlist/watchlist.py`, which helped me place the new feature in the existing codebase.
+- *What I changed or overrode:* I used that overview to target my edits to the correct files and confirmed the AI’s understanding against the actual repository contents.
 
 ## Comment 1 — Rename
 **What I did:**
@@ -80,5 +80,23 @@
 - Ran `git status` to confirm there were no remaining conflict markers and the working tree was clean.
 - Reviewed the watchlist files and reran the new watchlist test file to ensure the feature still behaves correctly after rebasing.
 
+![git log screenshot](img_gitlog.png)
+
+
 ## PR Description
-<!-- Written at the end — feature overview, design decisions, manual testing steps -->
+This PR adds a watchlist feature to CineLog, allowing users to save films they want to watch later and retrieve them via a dedicated watchlist endpoint.
+
+The watchlist is implemented with a new `WatchlistEntry` model, a service layer in `services/watchlist_service.py`, and routes in `routes/watchlist/watchlist.py`.
+
+Design decisions:
+- `public=True` is the default visibility for new watchlist entries. This choice optimizes for low-friction sharing and discovery while keeping the watchlist easy to consume in the API.
+- Watchlist results remain sorted alphabetically by `Film.title`. This preserves predictable scanning and sharing behavior, while still leaving room for a future sort toggle or a separate recently-added view.
+
+Manual testing steps:
+1. Start the Flask app.
+2. Create a user and a film in the database, or use existing test data.
+3. POST to `/watchlist/<user_id>/add` with `{ "film_id": <film_id> }` and confirm the response returns the new watchlist entry with `public: true`.
+4. GET `/watchlist/<user_id>` and confirm the returned films are sorted alphabetically by title.
+5. POST the same `film_id` again and confirm the response returns a `409 Conflict` error for duplicate entries.
+6. POST with a nonexistent `film_id` and confirm the response returns a `404 Not Found` error.
+7. Verify the watchlist response includes `date_added` and `public` fields for each entry.
