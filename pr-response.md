@@ -1,7 +1,7 @@
 # PR Response Doc — CineLog Watchlist Feature
 
 ## AI Usage
-<!-- Fill in at the end — how you used AI tools during this project -->
+<!-- Fill in at the end — how you used AI tools during this project. Could be: codebase orientation, understanding a pattern, stress-testing a design argument, verifying commit format, or another legitimate use. If you didn't use AI at any point, write a brief note saying so and what you relied on instead. If you used AI when drafting your Comment 4 or Comment 5 responses, describe what you asked and how your final argument differs from or builds on what the AI returned.-->
 <!-- Describe at least 2 specific instances where you used an AI tool during this project. 
      For each: what did you give the AI as input, what did it produce, and what did you
      change, override, or direct differently?
@@ -13,9 +13,9 @@
 
 **Instance 1**:
 
-- *What I gave the AI:* 
-- *What it produced:* 
-- *What I changed or overrode:* 
+- *What I gave the AI:* A draft of my Comment 5 answer about watchlist sort order, with the prompt: "What counterargument would a careful code reviewer raise against this position? What tradeoff am I not acknowledging?"
+- *What it produced:* A reviewer counterargument that alphabetical order treats the watchlist like a reference index instead of a personal queue, and that the tradeoff is ignoring recency/priority.
+- *What I changed or overrode:* I revised my final response to explicitly acknowledge that date-added is a valid personal-queue signal and to frame alphabetical order as a choice optimized for scanability/shareability.
 
 **Instance 2**:
 
@@ -61,8 +61,13 @@
 
 ## Comment 5 — Sort order
 **My position:**
+- I am keeping the current alphabetical order for watchlist results rather than switching to date-added sorting.
 **Reasoning:**
+- The watchlist feature is primarily a saved title list, and alphabetical order makes it easier for users to scan, locate, and share specific films.
+- The current UI already renders `Film.title`, so sorting by title preserves predictability and avoids surprising changes in item position as users add new entries.
 **Engagement with reviewer's point:**
+- I understand the maintainer’s argument that date-added is a stronger signal for a dynamic ‘what did I save most recently?’ workflow, and that is a valid expectation for a personal queue.
+- That said, alphabetical sorting better supports the core use case of a shareable watchlist and keeps the implementation simple; if we want both benefits, a future enhancement could expose a sort toggle or separate “recently added” view.
 
 ## Comment 6 — Rebase
 **What conflicted:**
