@@ -43,7 +43,11 @@
 
 ## Comment 3 — Missing test
 **What I did:**
+- Added a new `tests/test_watchlist.py` file with a watchlist-specific test for missing films.
+- Implemented `test_add_to_watchlist_nonexistent_film_raises` using the same fixtures and assertion style as `tests/test_collection.py`.
 **How I verified:**
+- Confirmed the new test mirrors the collection test structure and checks for `FilmNotFoundError`.
+- Verified the test uses the same in-memory SQLite app fixture pattern to keep watchlist tests consistent with existing coverage.
 
 ## Comment 4 — Default visibility
 **My position:**
