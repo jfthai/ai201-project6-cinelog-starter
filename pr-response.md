@@ -51,8 +51,13 @@
 
 ## Comment 4 — Default visibility
 **My position:**
+- I agree with keeping `public=True` as the default for new watchlist entries.
 **Reasoning:**
+- The watchlist is meant to be a lightweight, shareable list of films a user wants to see, and making entries public by default lowers friction for the common case of users sharing recommendations or discovering lists from others.
+- Since the current feature already exposes `public` in `WatchlistEntry.to_dict()`, the default=true behavior is consistent with the model and makes the watchlist easier to consume without requiring extra configuration.
 **Tradeoff acknowledged:**
+- I recognize that defaulting to public can be surprising for users who expect privacy by default, especially if they are saving personal watch goals.
+- If privacy is more important, the alternative would be `public=False` by default, which would be safer for sensitive use but would also make the feature less social and require an extra explicit action to share any watchlist entry.
 
 ## Comment 5 — Sort order
 **My position:**
