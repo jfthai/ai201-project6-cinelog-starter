@@ -34,7 +34,12 @@
 
 ## Comment 2 — Deduplication
 **What I did:**
+- Added duplicate-entry detection in `services/watchlist_service.py` before creating a new `WatchlistEntry`.
+- Raised a new `AlreadyInWatchlistError` when the same film is already on the user's watchlist.
+- Updated `routes/watchlist/watchlist.py` to map the duplicate error to a `409 Conflict` response.
 **How I verified:**
+- Reviewed the watchlist service logic to ensure the existing query check mirrors `add_to_collection()`.
+- Confirmed routes now handle duplicate watchlist adds consistently with collection error handling.
 
 ## Comment 3 — Missing test
 **What I did:**
