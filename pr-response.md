@@ -71,8 +71,14 @@
 
 ## Comment 6 — Rebase
 **What conflicted:**
+- The branch had diverged from `main` on the watchlist feature files and route handling, particularly `routes/watchlist/watchlist.py` and `services/watchlist_service.py`.
+- Rebase also surfaced an unrelated formatting change in `tests/test_watchlist.py` from the current branch and the base branch.
 **How I resolved it:**
+- Rebased onto `origin/main` and carefully kept the watchlist-specific service and route changes while discarding any unrelated merge artifacts.
+- Manually verified the duplicate-entry handling and error mapping changes remained intact after the rebase.
 **How I verified no conflict remains:**
+- Ran `git status` to confirm there were no remaining conflict markers and the working tree was clean.
+- Reviewed the watchlist files and reran the new watchlist test file to ensure the feature still behaves correctly after rebasing.
 
 ## PR Description
 <!-- Written at the end — feature overview, design decisions, manual testing steps -->
